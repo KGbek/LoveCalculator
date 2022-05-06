@@ -1,15 +1,16 @@
 package com.example.lovecalculator.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+
 import com.example.lovecalculator.App;
+import com.example.lovecalculator.R;
 import com.example.lovecalculator.base.BaseFrgment;
 import com.example.lovecalculator.data.LoveModel;
 import com.example.lovecalculator.databinding.FragmentCalculatorBinding;
@@ -26,6 +27,8 @@ public class CalculatorFragment extends BaseFrgment<FragmentCalculatorBinding> {
     String firstName;
     String secondName;
 
+    NavController navController;
+
     @Override
     public FragmentCalculatorBinding getLayoutBinding() {
         return FragmentCalculatorBinding.inflate(getLayoutInflater());
@@ -34,6 +37,7 @@ public class CalculatorFragment extends BaseFrgment<FragmentCalculatorBinding> {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
         binding.calculateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,11 +47,9 @@ public class CalculatorFragment extends BaseFrgment<FragmentCalculatorBinding> {
                     @Override
                     public void onResponse(Call<LoveModel> call, Response<LoveModel> response) {
                         if (response.isSuccessful()){
-                            Intent args = new Intent();
                             Bundle bundleArgs = new Bundle();
-                            bundleArgs.putString("fname", firstName.toString());
-                            bundleArgs.putString("sname", secondName.toString());
-                            args.putExtra("bundles", bundleArgs);
+                            bundleArgs.putSerializable("response", response.body());
+                            navController.navigate(R.id.answerFragment, bundleArgs);
                         }
                     }
 

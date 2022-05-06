@@ -4,12 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="15dp"
     tools:context=".fragment.AnswerFragment">
 
     <TextView
         android:layout_gravity="center_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:text="Calculation Result"
         android:textSize="40sp"/>
 
@@ -22,6 +23,12 @@
         android:text="First name"/>
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="+"/>
+
+    <TextView
         android:id="@+id/secondName"
         android:layout_gravity="center"
         android:layout_width="match_parent"
@@ -30,11 +37,17 @@
         android:text="First name"/>
 
     <TextView
+        android:id="@+id/percentge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"/>
+
+    <TextView
         android:id="@+id/result"
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:text="First name"/>
+        android:text="Result"/>
 
 </LinearLayout>

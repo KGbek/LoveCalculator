@@ -1,17 +1,13 @@
 package com.example.lovecalculator.fragment;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.example.lovecalculator.R;
 import com.example.lovecalculator.base.BaseFrgment;
+import com.example.lovecalculator.data.LoveModel;
 import com.example.lovecalculator.databinding.FragmentAnswerBinding;
 
 
@@ -26,7 +22,10 @@ public class AnswerFragment extends BaseFrgment<FragmentAnswerBinding> {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Bundle answer = getArguments();
-        answer.putAll(answer.getBundle(a));
+        LoveModel loveResult = (LoveModel) getArguments().getSerializable("response");
+        binding.firstName.setText(loveResult.getFirstName().toString());
+        binding.secondName.setText(loveResult.getSecondName().toString());
+        binding.percentge.setText("Percentage is : "+loveResult.getPercentage().toString());
+        binding.result.setText(loveResult.getResult().toString());
     }
 }
