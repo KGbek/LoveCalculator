@@ -44,4 +44,14 @@ public class LoveModel implements Serializable {
     public void setResult(String result) {
         this.result = result;
     }
+
+    @Override
+    public String toString() {
+        return "LoveModel{" +
+                "firstName='" + firstName + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", percentage='" + percentage + '\'' +
+                ", result='" + result + '\'' +
+                '}';
+    }
 }

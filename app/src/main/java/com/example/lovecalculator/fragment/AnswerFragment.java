@@ -22,10 +22,10 @@ public class AnswerFragment extends BaseFrgment<FragmentAnswerBinding> {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        LoveModel loveResult = (LoveModel) getArguments().getSerializable("response");
+        LoveModel loveResult = (LoveModel) getArguments().getSerializable("answer");
         binding.firstName.setText(loveResult.getFirstName().toString());
         binding.secondName.setText(loveResult.getSecondName().toString());
-        binding.percentge.setText("Percentage is : "+loveResult.getPercentage().toString());
+        binding.percentge.setText("Percentage is : "+loveResult.getPercentage());
         binding.result.setText(loveResult.getResult().toString());
     }
 }

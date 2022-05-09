@@ -1,11 +1,15 @@
 package com.example.lovecalculator.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -21,13 +25,13 @@ import retrofit2.Response;
 
 public class CalculatorFragment extends BaseFrgment<FragmentCalculatorBinding> {
 
-    String HOST = "love-calculator.p.rapidapi.com";
-    String KEY = "0ac5c7f17dmshd67550a69127498p13b2a2jsncbebc809ecfa";
-
     String firstName;
     String secondName;
 
     NavController navController;
+
+    CalculationViewModel calculationViewModel;
+
 
     @Override
     public FragmentCalculatorBinding getLayoutBinding() {
@@ -37,27 +41,24 @@ public class CalculatorFragment extends BaseFrgment<FragmentCalculatorBinding> {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        calculationViewModel = ViewModelProviders.of(this).get(CalculationViewModel.class);
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
         binding.calculateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 firstName = binding.firstName.getText().toString();
                 secondName = binding.secondName.getText().toString();
-                App.api.getLove(firstName, secondName, HOST, KEY).enqueue(new Callback<LoveModel>() {
-                    @Override
-                    public void onResponse(Call<LoveModel> call, Response<LoveModel> response) {
-                        if (response.isSuccessful()){
-                            Bundle bundleArgs = new Bundle();
-                            bundleArgs.putSerializable("response", response.body());
-                            navController.navigate(R.id.answerFragment, bundleArgs);
-                        }
-                    }
+                calculationViewModel.getLove(firstName, secondName);
+            }
+        });
 
-                    @Override
-                    public void onFailure(Call<LoveModel> call, Throwable t) {
-                        Toast.makeText(getContext(), t.toString(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+        calculationViewModel.result.observe(getViewLifecycleOwner(), new Observer<LoveModel>() {
+            @Override
+            public void onChanged(LoveModel loveModel) {
+                Bundle arguments = new Bundle();
+                arguments.putSerializable("answer", loveModel);
+                Log.e("-----------", loveModel.toString());
+                navController.navigate(R.id.answerFragment, arguments);
             }
         });
     }
