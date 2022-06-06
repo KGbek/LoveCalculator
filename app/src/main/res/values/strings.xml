@@ -2,4 +2,16 @@
     <string name="app_name">LoveCalculator</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="Description">
+        <item>This is first description. As you know copywriting is not easy</item>
+        <item>This is second description. As you know copywriting is not easy</item>
+        <item>This is third description. As you know copywriting is not easy</item>
+        <item>This is fourth description. As you know copywriting is not easy</item>
+    </string-array>
+    <string-array name="heading">
+        <item>HEADING 1</item>
+        <item>HEADING 2</item>
+        <item>HEADING 3</item>
+        <item>HEADING 4</item>
+    </string-array>
 </resources>

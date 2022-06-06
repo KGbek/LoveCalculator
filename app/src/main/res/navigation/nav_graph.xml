@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/calculatorFragment">
+    app:startDestination="@id/onboardFragment">
 
     <fragment
         android:id="@+id/calculatorFragment"
@@ -19,4 +19,9 @@
         android:name="com.example.lovecalculator.fragment.AnswerFragment"
         android:label="fragment_answer"
         tools:layout="@layout/fragment_answer" />
+    <fragment
+        android:id="@+id/onboardFragment"
+        android:name="com.example.lovecalculator.onboard.onboardFragment"
+        android:label="fragment_onboard"
+        tools:layout="@layout/fragment_onboard" />
 </navigation>
